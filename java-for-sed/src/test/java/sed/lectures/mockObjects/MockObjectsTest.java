@@ -20,7 +20,7 @@ public class MockObjectsTest {
 
   @Test
   public void delegatesDessertsToPastryChef() {
-    HeadChef headChef = new HeadChef();
+    HeadChef headChef = new HeadChef(pastryChef);
 
     context.checking(new Expectations() {
       {

@@ -23,3 +23,13 @@ java {
 application {
     mainClass = 'sed.Main'
 }
+
+test {
+    testLogging {
+        events = ["passed", "skipped", "failed"]
+        exceptionFormat = "full"
+        showStandardStreams = true
+    }
+}
+
+
