@@ -40,7 +40,23 @@ public class MockObjectsTest {
     context.checking(new Expectations() {
       {
         exactly(1).of(pastryChef).isCooked(APPLE_TART);
+        will(returnValue(true));
         exactly(1).of(waiter).serve(APPLE_TART);
+      }
+    });
+
+    headChef.customerReadyFor(APPLE_TART);
+
+  }
+
+  @Test
+  public void doesNotAskWaiterToServeWhenNotCooked() {
+    HeadChef headChef = new HeadChef(pastryChef, waiter);
+
+    context.checking(new Expectations() {
+      {
+        exactly(1).of(pastryChef).isCooked(APPLE_TART);
+        will(returnValue(false));
       }
     });
 

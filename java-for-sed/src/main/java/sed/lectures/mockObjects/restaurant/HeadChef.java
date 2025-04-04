@@ -12,12 +12,12 @@ public class HeadChef {
 
   public void order(Order main, Order dessert) {
     pastryChef.order(dessert);
-
   }
 
   public void customerReadyFor(Order dessert) {
-    pastryChef.isCooked(dessert);
-    waiter.serve(dessert);
+    if (pastryChef.isCooked(dessert)) {
+      waiter.serve(dessert);
+    }
   }
 
 }
