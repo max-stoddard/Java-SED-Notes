@@ -1,0 +1,31 @@
+plugins {
+    id 'application'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'org.jmock:jmock:2.12.0'
+    testImplementation 'org.jmock:jmock-junit4:2.12.0'
+}
+
+
+// Apply a specific Java toolchain to ease working on different environments.
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(19)
+    }
+}
+
+application {
+    // Define the main class for the application.
+    mainClass = 'org.example.App'
+}
+
+tasks.named('test') {
+    // Use JUnit Platform for unit tests.
+    useJUnitPlatform()
+}
