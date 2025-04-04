@@ -8,6 +8,7 @@ import org.junit.Test;
 import sed.lectures.mockObjects.restaurant.Chef;
 import sed.lectures.mockObjects.restaurant.HeadChef;
 import sed.lectures.mockObjects.restaurant.Order;
+import sed.lectures.mockObjects.restaurant.Waiter;
 
 public class MockObjectsTest {
   @Rule
@@ -17,10 +18,11 @@ public class MockObjectsTest {
   final Order ROAST_CHICKEN = new Order("roast chicken");
 
   Chef pastryChef = context.mock(Chef.class);
+  Waiter waiter = context.mock(Waiter.class);
 
   @Test
   public void delegatesDessertsToPastryChef() {
-    HeadChef headChef = new HeadChef(pastryChef);
+    HeadChef headChef = new HeadChef(pastryChef, waiter);
 
     context.checking(new Expectations() {
       {
@@ -29,5 +31,20 @@ public class MockObjectsTest {
     });
 
     headChef.order(ROAST_CHICKEN, APPLE_TART);
+  }
+
+  @Test
+  public void asksWaiterToServeDessertWhenReady() {
+    HeadChef headChef = new HeadChef(pastryChef, waiter);
+
+    context.checking(new Expectations() {
+      {
+        exactly(1).of(pastryChef).isCooked(APPLE_TART);
+        exactly(1).of(waiter).serve(APPLE_TART);
+      }
+    });
+
+    headChef.customerReadyFor(APPLE_TART);
+
   }
 }

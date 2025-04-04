@@ -4,4 +4,6 @@ public interface Chef {
 
   void order(Order order);
 
+  boolean isCooked(Order order);
+
 }
